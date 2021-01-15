@@ -20,7 +20,8 @@ useSelector(state => state) does not rerender elements, neverless state is chang
 [x] 6.5
 
  action functions
-[ ] 6.6
+[x] 6.6
+
 [ ] 6.7
 [ ] 6.8
 
