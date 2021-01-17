@@ -27,7 +27,7 @@ useSelector(state => state) does not rerender elements, neverless state is chang
 [x] 6.8
 
 
-[ ] 6.9
+[x] 6.9
 [ ] 6.10
 [ ] 6.11
 [ ] 6.12
