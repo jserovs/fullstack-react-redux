@@ -6,6 +6,7 @@ import Anecdote from './Anecdote'
 
 
 function AnecdoteList() {
+    
     const anecdotes = useSelector(state => state.anecdotes, () => { })
     const dispatch = useDispatch()
 

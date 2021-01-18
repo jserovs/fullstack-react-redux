@@ -6,7 +6,7 @@ function AnecdoteForm() {
 
     const dispatch = useDispatch()
 
-    const create = (event) => {
+    const create = async (event) => {
         event.preventDefault()
         //getting value from form unput = anecdote
         const content = event.target.anecdote.value
