@@ -37,18 +37,18 @@ const reducer = (state = [initialState], action) => {
 
   if (action.type === 'CREATE') {
     // asObject, create ready anecdote, by getting content
-    const newBlog = asObject(action.data.content)
-    console.log(newBlog)
-    anecdoteService.post(newBlog)
+
+    console.log("action data:" + JSON.stringify(action.data))
+
     // add element to array
-    return [...state, newBlog]
+    return [...state, action.data]
 
 
     // return [...state, asObject(action.data.content)]
   }
 
 
-  if (action.type === 'INIT') {    
+  if (action.type === 'INIT') {
     state = action.data
   }
 
@@ -65,18 +65,23 @@ export const voteAnecdote = (id) => {
 }
 
 export const createAnecdote = (content) => {
-  return {
-    type: 'CREATE',
-    data: {
-      content
-    }
+  return async dispatch => {
+    const data = asObject(content)
+    const res = await anecdoteService.post()
+    dispatch({
+      type: 'CREATE',
+      data
+    })
   }
 }
 
-export const initializeAnecdotes = (data) => {
-  return {
-    type: 'INIT',
-    data
+export const initializeAnecdotes = () => {
+  return async dispatch => {
+    const data = await anecdoteService.getAll()
+    dispatch({
+      type: 'INIT',
+      data: data,
+    })
   }
 }
 
