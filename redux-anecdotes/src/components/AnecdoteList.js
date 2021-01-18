@@ -8,8 +8,18 @@ import Filter from './Filter'
 
 function AnecdoteList () {
 
-    const anecdotes = useSelector(state => state.anecdotes, () => { })
-    const anecdoteFilter = useSelector(state => state.anecdoteFilter, () => { })
+    const anecdotes = useSelector(({anecdoteFilter, anecdotes}) => {
+        console.log (anecdotes)
+        if (anecdoteFilter === '') { 
+            console.log('no filter')
+            return anecdotes }
+        return anecdotes.filter(item => {
+            return item.content.includes(anecdoteFilter)
+        })
+    })
+
+    // const anecdotes = useSelector(state => state.anecdotes, () => { })
+    // const anecdoteFilter = useSelector(state => state.anecdoteFilter, () => { })
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -23,19 +33,19 @@ function AnecdoteList () {
 
     }
 
-    var arrayToShow = []
+    // var arrayToShow = []
 
-    if (anecdotes.length > 0 ) {
-        arrayToShow = anecdotes.filter(item => {
-            return item.content.includes(anecdoteFilter)
-        })
-    }
+    // if (anecdotes.length > 0 ) {
+    //     arrayToShow = anecdotes.filter(item => {
+    //         return item.content.includes(anecdoteFilter)
+    //     })
+    // }
 
     return (
         <div>
             <Filter />
             <div>
-                {arrayToShow.sort((a, b) => b.votes - a.votes).map(anecdote =>
+                {anecdotes.sort((a, b) => b.votes - a.votes).map(anecdote =>
                     <Anecdote key={anecdote.id} anecdote={anecdote} handleClick={() => voteForAnecdote(anecdote)} />
                 )}
             </div>
