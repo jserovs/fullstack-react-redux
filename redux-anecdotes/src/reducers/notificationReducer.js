@@ -5,13 +5,13 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET':
             state = action.data.notificationMessage;
-            break;
+            break
 
         case 'REMOVE':
             state = initialState;
-            break;
+            break
         default:
-            break;
+            break
     }
 
     return state
