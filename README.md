@@ -33,10 +33,10 @@ useSelector(state => state) does not rerender elements, neverless state is chang
 [ ] 6.12
 [x] 6.13
 [x] 6.14
-[ ] 6.15
-[ ] 6.16
-[ ] 6.17
-[ ] 6.18
+[x] 6.15
+[x] 6.16
+[x] 6.17
+[x] 6.18
 [ ] 6.19
 [ ] 6.20
 [ ] 6.21

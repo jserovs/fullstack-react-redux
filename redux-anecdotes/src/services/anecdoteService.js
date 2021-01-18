@@ -8,7 +8,14 @@ const getAll = async () => {
 }
 
 const post = async (data) => {
-    const response = await axios.post(baseUrl, data)
+  const response = await axios.post(baseUrl, data)
+  console.log(response)
 }
 
-export default { getAll, post}
+const put = async (data) => {
+  console.log (data)
+  const response = await axios.put(baseUrl+'/'+data.id, data)
+  console.log(response)
+}
+
+export default { getAll, post, put }

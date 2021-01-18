@@ -1,28 +1,31 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNotification, removeNotification } from '../reducers/notificationReducer'
-import { voteAnecdote } from '../reducers/anecdoteReducer'
+import { voteAnecdote, initializeAnecdotes } from '../reducers/anecdoteReducer'
 import Anecdote from './Anecdote'
 
 
 function AnecdoteList() {
-    
+
     const anecdotes = useSelector(state => state.anecdotes, () => { })
     const dispatch = useDispatch()
 
-    const voteForAnecdote = (id, content) => {
-        dispatch(voteAnecdote(id))
-        dispatch(setNotification('you voted for: "' + content + '"!'))
-        setTimeout(() => {
-            dispatch(removeNotification())
-          }, 5000)
-    }
-    
+    useEffect(() => {
+        dispatch(initializeAnecdotes())
+      },[dispatch])
+
+
+    const voteForAnecdote = (anecdote) => {
+        console.log (anecdote)
+        dispatch(voteAnecdote(anecdote))
+        dispatch(setNotification(`you voted '${anecdote.content}'`, 5))
+
+    }    
 
     return (
         <div>
             {anecdotes.sort((a, b) => b.votes - a.votes).map(anecdote =>
-                <Anecdote key={anecdote.id} anecdote={anecdote} handleClick={() => voteForAnecdote(anecdote.id, anecdote.content)} />
+                <Anecdote key={anecdote.id} anecdote={anecdote} handleClick={() => voteForAnecdote(anecdote)} />
             )}
         </div>
     )
