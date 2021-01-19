@@ -10,14 +10,14 @@ const Notification = () => {
     border: 'solid',
     padding: 10,
     borderWidth: 1,
-    display: notification === '' ? 'none' : ''
+    display: notification.message === '' ? 'none' : ''
   }
 
 
 
   return (
     <div style={style}>
-      {notification}
+      {notification.message}
     </div>
   )
 }
