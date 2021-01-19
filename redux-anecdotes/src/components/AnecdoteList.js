@@ -1,31 +1,23 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setNotification } from '../reducers/notificationReducer'
-import { voteAnecdote, initializeAnecdotes } from '../reducers/anecdoteReducer'
+import { voteAnecdote } from '../reducers/anecdoteReducer'
 import Anecdote from './Anecdote'
 import Filter from './Filter'
 
 
-function AnecdoteList () {
+function AnecdoteList() {
 
-    const anecdotes = useSelector(({anecdoteFilter, anecdotes}) => {
-        console.log (anecdotes)
-        if (anecdoteFilter === '') { 
-            console.log('no filter')
-            return anecdotes }
+    const anecdotes = useSelector(({ anecdoteFilter, anecdotes }) => {
+        if (anecdoteFilter === '') {
+            return anecdotes
+        }
         return anecdotes.filter(item => {
             return item.content.includes(anecdoteFilter)
         })
-    })
+    }, () => {})
 
-    // const anecdotes = useSelector(state => state.anecdotes, () => { })
-    // const anecdoteFilter = useSelector(state => state.anecdoteFilter, () => { })
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(initializeAnecdotes())
-    }, [dispatch])
-
 
     const voteForAnecdote = (anecdote) => {
         dispatch(voteAnecdote(anecdote))
@@ -33,13 +25,6 @@ function AnecdoteList () {
 
     }
 
-    // var arrayToShow = []
-
-    // if (anecdotes.length > 0 ) {
-    //     arrayToShow = anecdotes.filter(item => {
-    //         return item.content.includes(anecdoteFilter)
-    //     })
-    // }
 
     return (
         <div>

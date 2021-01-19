@@ -9,13 +9,12 @@ const getAll = async () => {
 
 const post = async (data) => {
   const response = await axios.post(baseUrl, data)
-  console.log(response)
+  console.log("POST: "+ response)
 }
 
 const put = async (data) => {
-  console.log (data)
   const response = await axios.put(baseUrl+'/'+data.id, data)
-  console.log(response)
+  console.log("PUT: " + response)
 }
 
 export default { getAll, post, put }

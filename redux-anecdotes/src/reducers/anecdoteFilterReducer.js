@@ -7,7 +7,6 @@ const reducer = (state = initialState, action) => {
         case 'SET_FILTER':
             // state = action.filter
             state = action.data.filter
-            console.log("state:" + action.data.filter)
             break
 
         default:

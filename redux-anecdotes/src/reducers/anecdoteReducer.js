@@ -28,40 +28,30 @@ const initialState = []
 const reducer = (state = initialState, action) => {
 
   if (action.type === 'VOTE') {
-    // const id = action.data.id
-    // var anecdoteToVote = state.find(element => element.id === id)
-    // anecdoteToVote.votes++
-
-    // state.map((anecdote) => anecdote.id !== id ? anecdote : anecdoteToVote)
+    const id = action.data.id
+    var anecdoteToVote = state.find(element => element.id === id)
+    return state.map((anecdote) => anecdote.id !== id ? anecdote : anecdoteToVote)
   }
 
   if (action.type === 'CREATE') {
-    // asObject, create ready anecdote, by getting content
-
-    console.log("action data:" + JSON.stringify(action.data))
-
-    // add element to array
     return [...state, action.data]
-
-
-    // return [...state, asObject(action.data.content)]
   }
 
-
   if (action.type === 'INIT') {
-    state = action.data
+    state = action.data    
   }
 
   return state
 }
 
 export const voteAnecdote = (anecdote) => {
-
   ++anecdote.votes
-
   return async dispatch => {
      const res = await anecdoteService.put(anecdote)
-     console.log (res)
+     dispatch({
+       type: 'VOTE',
+       data: { id: anecdote.id  }
+     })
   }
 }
 
@@ -69,7 +59,6 @@ export const createAnecdote = (content) => {
   return async dispatch => {
     const data = asObject(content)
     const res = await anecdoteService.post(data)
-    console.log (res)
     dispatch({
       type: 'CREATE',
       data
