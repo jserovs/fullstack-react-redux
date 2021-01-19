@@ -19,13 +19,6 @@ const reducer = (state = initialState, action) => {
 
 export const setNotification = (message, seconds) => {
 
-    // return {
-    //     type: 'SET',
-    //     data: {
-    //         notificationMessage: message
-    //     }
-    // }
-
     return async dispatch => {
         
         dispatch({
